@@ -1,0 +1,118 @@
+
+# CLEANING OF SMARTPHONE SHIPMENT DATA FROM STATISTA
+
+
+install.packages("xlsx") 
+install.packages("stringr") 
+install.packages("tidyverse")
+library(xlsx) 
+library(stringr) 
+library(tidyverse)
+
+
+#Setting working directory to read my dataset excel file
+
+
+setwd("D:\\DWBI Final Data\\Project")
+shipment_data = 'D:\\DWBI Final Data\\Project\\statistic_id271490_global-smartphone-shipments-by-vendor-manufacturer-2009-2018.xlsx'
+shipment_dataFrame <- read.xlsx(shipment_data, sheetIndex =2 , startRow=5)
+
+names(shipment_dataFrame)[1]<-"Year"
+names(shipment_dataFrame)[5] <-"Xiaomi"
+names(shipment_dataFrame)[4] <-"Huawei"
+names(shipment_dataFrame)[7] <-"LG"
+names(shipment_dataFrame)[8] <-"Lenovo"
+names(shipment_dataFrame)[9] <-"ZTE"
+names(shipment_dataFrame)[14] <-"Nokia"
+names(shipment_dataFrame)[11] <-"Sony"
+names(shipment_dataFrame)[13] <-"HTC"
+shipment_dataFrame$vivo <- NULL
+shipment_dataFrame$RIM. <- NULL
+shipment_dataFrame$OPPO <- NULL
+
+stringSeprator <- str_split_fixed(shipment_dataFrame$Year, " ", 2)
+shipment_dataFrame <- add_column(shipment_dataFrame, Quarter=stringSeprator[1:37,1], .after = "Year")
+
+shipment_dataFrame$Quarter <- gsub("[a-zA-Z ]", "", shipment_dataFrame$Quarter)
+
+shipment_dataFrame$Year <- gsub("Q1 '", "20", shipment_dataFrame$Year)
+shipment_dataFrame$Year <- gsub("Q2 '", "20", shipment_dataFrame$Year)
+shipment_dataFrame$Year <- gsub("Q3 '", "20", shipment_dataFrame$Year)
+shipment_dataFrame$Year <- gsub("Q4 '", "20", shipment_dataFrame$Year)
+shipment_dataFrame$Year[31] <- "2017"
+shipment_dataFrame$Quarter[31] <- "2"
+write.csv(shipment_dataFrame, file="ShipmentShare.csv",row.names=FALSE)
+getwd()
+altered_dataframe <- read.csv("D:\\DWBI Final Data\\Project\\ShipmentShare.csv", header=T, na.strings=c("-","NA"))
+
+
+
+
+#Replace NA by Mean
+
+
+x <- mean(altered_dataframe$Nokia, na.rm = T,digits=1, nsmall=1)
+y <- format(x, digits=1, nsmall=1)
+altered_dataframe$Nokia[which(is.na(altered_dataframe$Nokia))] <- y
+
+x <- mean(altered_dataframe$Huawei, na.rm = T,digits=1, nsmall=1)
+y <- format(x, digits=1, nsmall=1)
+altered_dataframe$Huawei[which(is.na(altered_dataframe$Huawei))] <- y
+
+x <- mean(altered_dataframe$Xiaomi, na.rm = T,digits=1, nsmall=1)
+y <- format(x, digits=1, nsmall=1)
+altered_dataframe$Xiaomi[which(is.na(altered_dataframe$Xiaomi))] <- y
+
+x <- mean(altered_dataframe$Sony, na.rm = T,digits=1, nsmall=1)
+y <- format(x, digits=1, nsmall=1)
+altered_dataframe$Sony[which(is.na(altered_dataframe$Sony))] <- y
+
+x <- mean(altered_dataframe$LG, na.rm = T,digits=1, nsmall=1)
+y <- format(x, digits=1, nsmall=1)
+altered_dataframe$LG[which(is.na(altered_dataframe$LG))] <- y
+
+x <- mean(altered_dataframe$Lenovo, na.rm = T,digits=1, nsmall=1)
+y <- format(x, digits=1, nsmall=1)
+altered_dataframe$Lenovo[which(is.na(altered_dataframe$Lenovo))] <- y
+
+x <- mean(altered_dataframe$ZTE, na.rm = T,digits=1, nsmall=1)
+y <- format(x, digits=1, nsmall=1)
+altered_dataframe$ZTE[which(is.na(altered_dataframe$ZTE))] <- y
+
+x <- mean(altered_dataframe$HTC, na.rm = T,digits=1, nsmall=1)
+y <- format(x, digits=1, nsmall=1)
+altered_dataframe$HTC[which(is.na(altered_dataframe$HTC))] <- y
+
+altered_dataframe <- altered_dataframe[altered_dataframe$Year > "2013-12-31",]
+altered_dataframe<-altered_dataframe[!(altered_dataframe$Year=="2018" & altered_dataframe$Quarter==4),]
+altered_dataframe<-altered_dataframe[!(altered_dataframe$Year=="2018" & altered_dataframe$Quarter==3),]
+
+write.csv(altered_dataframe, file="Shipment_mean.csv",row.names = F)
+
+
+
+#Cleaning the data
+
+shipmentDataFrame <- read.csv("D:\\DWBI Final Data\\Project\\Shipment_mean.csv")
+year = shipmentDataFrame$Year
+
+shipment_data_frame <- data.frame(matrix(ncol = 4, nrow= 0))
+column_names <- c("Year", "Quarter", "Brand", "Shipment Percentage")
+colnames(shipment_data_frame) <- column_names
+
+for (i in 3: ncol(shipmentDataFrame)) {
+  lengthOfDataFrame = nrow(shipment_data_frame) 
+  for (j in 1 : length(year)) {
+    shipment_data_frame[ lengthOfDataFrame + j, ] = c(shipmentDataFrame$Year[j], shipmentDataFrame$Quarter[j],colnames( shipmentDataFrame )[i] , shipmentDataFrame[j, i])
+  }
+}
+
+shipment_data_frame <- shipment_data_frame[!grepl("Vivo", shipment_data_frame$Brand),]
+write.csv(shipment_data_frame, 'ShipmentDataByVendor.csv', row.names=FALSE)
+
+
+#During ETL
+
+if (file.exists("ShipmentV.csv")) file.remove("ShipmentV.csv")
+if (file.exists("ShipmentShare.csv")) file.remove("ShipmentShare.csv")
+
