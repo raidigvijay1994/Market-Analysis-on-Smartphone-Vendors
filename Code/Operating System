@@ -1,0 +1,761 @@
+
+
+############################################# CLEANING OF OPERATING SYSTEM DATA FROM STATSCOUNTER ########################################
+
+
+###########################LOADING OPERATING SYSTEM DATA IN DATAFRAMES FOR COUNTRY IRELAND ###############################################
+
+
+
+setwd("D:\\dummy\\smartphone\\Operating system_clean\\OS\\ireland")
+
+Ireland_data_2014 <- read.csv('D:\\dummy\\smartphone\\Operating system_clean\\OS\\ireland\\os_combined-IE-quarterly-20141-20144.csv')
+
+test_Ireland_2014 <- Ireland_data_2014
+
+test_Ireland_2014 <- test_Ireland_2014[ , which(names(test_Ireland_2014) %in% c("Date","Android","Samsung","SymbianOS","Windows","Linux","iOS","bada","LG","Other"))]
+setwd("D:\\Project")
+write.csv(test_Ireland_2014, file="Ireland_2014.csv",row.names = FALSE)
+
+
+
+setwd("D:\\dummy\\smartphone\\Operating system_clean\\OS\\ireland")
+
+Ireland_data_2015 <- read.csv('D:\\dummy\\smartphone\\Operating system_clean\\OS\\ireland\\os_combined-IE-quarterly-20151-20154.csv')
+
+test_Ireland_2015 <- Ireland_data_2015
+
+test_Ireland_2015 <- test_Ireland_2015[ , which(names(test_Ireland_2015) %in% c("Date","Android","Samsung","SymbianOS","Windows","Linux","iOS","bada","LG","Other"))]
+setwd("D:\\Project")
+write.csv(test_Ireland_2015, file="Ireland_2015.csv",row.names = FALSE)
+
+
+setwd("D:\\dummy\\smartphone\\Operating system_clean\\OS\\ireland")
+
+Ireland_data_2016 <- read.csv('D:\\dummy\\smartphone\\Operating system_clean\\OS\\ireland\\os_combined-IE-quarterly-20161-20164.csv')
+
+test_Ireland_2016 <- Ireland_data_2016
+
+#x <- x[-c(3,5,8,11,12,13,14,16,18,19,21,22,23,24,25,26,27,28,29,30,31,33,34,35,36,37)]
+test_Ireland_2016 <- test_Ireland_2016[ , which(names(test_Ireland_2016) %in% c("Date","Android","Samsung","SymbianOS","Windows","Linux","iOS","bada","LG","Other"))]
+setwd("D:\\Project")
+write.csv(test_Ireland_2016, file="Ireland_2016.csv",row.names = FALSE)
+
+
+
+
+setwd("D:\\dummy\\smartphone\\Operating system_clean\\OS\\ireland")
+
+Ireland_data_2017 <- read.csv('D:\\dummy\\smartphone\\Operating system_clean\\OS\\ireland\\os_combined-IE-quarterly-20171-20174.csv')
+
+test_Ireland_2017 <- Ireland_data_2017
+
+#x <- x[-c(3,5,8,11,12,13,14,16,18,19,21,22,23,24,25,26,27,28,29,30,31,33,34,35,36,37)]
+test_Ireland_2017 <- test_Ireland_2017[ , which(names(test_Ireland_2017) %in% c("Date","Android","Samsung","SymbianOS","Windows","Linux","iOS","bada","LG","Other"))]
+setwd("D:\\Project")
+write.csv(test_Ireland_2017, file="Ireland_2017.csv",row.names = FALSE)
+
+
+setwd("D:\\dummy\\smartphone\\Operating system_clean\\OS\\ireland")
+
+Ireland_data_2018 <- read.csv('D:\\dummy\\smartphone\\Operating system_clean\\OS\\ireland\\os_combined-IE-quarterly-20181-20184.csv')
+
+test_Ireland_2018 <- Ireland_data_2018
+
+#x <- x[-c(3,5,8,11,12,13,14,16,18,19,21,22,23,24,25,26,27,28,29,30,31,33,34,35,36,37)]
+test_Ireland_2018 <- test_Ireland_2018[ , which(names(test_Ireland_2018) %in% c("Date","Android","Samsung","SymbianOS","Windows","Linux","iOS","bada","LG","Other"))]
+setwd("D:\\Project")
+write.csv(test_Ireland_2018, file="Ireland_2018.csv",row.names = FALSE)
+
+
+#####################  REMOVING SPECIAL CHARACTERS
+
+OS1_Ireland_2014 <- read.csv("D:\\Project\\Ireland_2014.csv")
+
+#----
+
+OSedit_Ireland_2014 <- OS1_Ireland_2014
+
+#2. #add column inbetween two columns
+OSedit_Ireland_2014 <- add_column(OSedit_Ireland_2014, Quarter=1:4, .after = "Date")
+
+#remove pattern from columns
+#gsub("([0-9]+)-.*", "\\1", CN1$Date)
+
+#list2 <- rep("2018",4)
+#3. Remove pattern
+OSedit_Ireland_2014$Date <- gsub("([0-9]+)-.*", "\\1", OSedit_Ireland_2014$Date)
+
+
+#CN1[,1] <- NULL
+#4.# Rename column name
+names(OSedit_Ireland_2014)[1]<-"Year"
+
+
+OS_CN1_Ireland <- OSedit_Ireland_2014
+
+
+
+
+#---------------------------------
+
+
+OS2_Ireland_2015 <- read.csv("D:\\Project\\Ireland_2015.csv")
+
+#----
+
+OSedit_Ireland_2015 <- OS2_Ireland_2015
+
+#2. #add column inbetween two columns
+OSedit_Ireland_2015 <- add_column(OSedit_Ireland_2015, Quarter=1:4, .after = "Date")
+
+#remove pattern from columns
+#gsub("([0-9]+)-.*", "\\1", CN1$Date)
+
+#list2 <- rep("2018",4)
+#3. Remove pattern
+OSedit_Ireland_2015$Date <- gsub("([0-9]+)-.*", "\\1", OSedit_Ireland_2015$Date)
+
+
+#CN1[,1] <- NULL
+#4.# Rename column name
+names(OSedit_Ireland_2015)[1]<-"Year"
+
+
+OS_CN2_Ireland <- OSedit_Ireland_2015
+
+#--------------------------------------------------------------------
+
+OS3_Ireland_2016 <- read.csv("D:\\Project\\Ireland_2016.csv")
+
+#----
+
+OSedit_Ireland_2016 <- OS3_Ireland_2016
+
+#2. #add column inbetween two columns
+OSedit_Ireland_2016 <- add_column(OSedit_Ireland_2016, Quarter=1:4, .after = "Date")
+
+#remove pattern from columns
+#gsub("([0-9]+)-.*", "\\1", CN1$Date)
+
+#list2 <- rep("2018",4)
+#3. Remove pattern
+OSedit_Ireland_2016$Date <- gsub("([0-9]+)-.*", "\\1", OSedit_Ireland_2016$Date)
+
+
+#CN1[,1] <- NULL
+#4.# Rename column name
+names(OSedit_Ireland_2016)[1]<-"Year"
+
+
+OS_CN3_Ireland <- OSedit_Ireland_2016
+
+
+
+#------------------------------------------------------------------------------------------
+
+
+OS4_Ireland_2017 <- read.csv("D:\\Project\\Ireland_2017.csv")
+
+#----
+
+OSedit_Ireland_2017 <- OS4_Ireland_2017
+
+#2. #add column inbetween two columns
+OSedit_Ireland_2017 <- add_column(OSedit_Ireland_2017, Quarter=1:4, .after = "Date")
+
+#remove pattern from columns
+#gsub("([0-9]+)-.*", "\\1", CN1$Date)
+
+#list2 <- rep("2018",4)
+#3. Remove pattern
+OSedit_Ireland_2017$Date <- gsub("([0-9]+)-.*", "\\1", OSedit_Ireland_2017$Date)
+
+
+#CN1[,1] <- NULL
+#4.# Rename column name
+names(OSedit_Ireland_2017)[1]<-"Year"
+
+
+OS_CN4_Ireland <- OSedit_Ireland_2017
+
+
+
+#----------------------------------------------------------------------------
+
+
+OS5_Ireland_2018 <- read.csv("D:\\Project\\Ireland_2018.csv")
+
+#----
+
+OSedit_Ireland_2018 <- OS5_Ireland_2018
+
+#2. #add column inbetween two columns
+OSedit_Ireland_2018 <- add_column(OSedit_Ireland_2018, Quarter=1:4, .after = "Date")
+
+#remove pattern from columns
+#gsub("([0-9]+)-.*", "\\1", CN1$Date)
+
+#list2 <- rep("2018",4)
+#3. Remove pattern
+OSedit_Ireland_2018$Date <- gsub("([0-9]+)-.*", "\\1", OSedit_Ireland_2018$Date)
+
+
+#CN1[,1] <- NULL
+#4.# Rename column name
+names(OSedit_Ireland_2018)[1]<-"Year"
+
+
+OS_CN5_Ireland <- OSedit_Ireland_2018
+
+
+################MERGING ALL DATAFRAMES TO GET FINAL OPERATING SYSTEM DATA FOR COUNTRY IRELAND ################
+
+
+OS_Ireland_marketShareDf = Reduce(function(x, y) merge(x, y, all=TRUE), list(OS_CN1_Ireland,OS_CN2_Ireland,OS_CN3_Ireland,OS_CN4_Ireland,OS_CN5_Ireland))
+
+OS_Ireland_marketShareDf$Country <- "Ireland"
+setwd("D:\\Project")
+
+write.csv(OS_Ireland_marketShareDf, file="Ireland.csv",row.names =  F)
+
+
+
+#---
+
+
+h_Ireland <- read.csv("D:\\dummy\\smartphone\\Operating system_clean\\OS\\ireland\\Ireland.csv")
+
+
+year = h_Ireland$Year
+OS_Ireland_marketShare_data_frame <- data.frame(matrix(ncol = 5, nrow= 0))
+column_names <- c("Year", "Quarter", "Country", "Operating System", "Value")
+colnames(OS_Ireland_marketShare_data_frame) <- column_names
+#str(h_Ireland)
+
+
+for (i in c(3,4,5,6,7,9)) {
+  lengthOfDataFrame = nrow(OS_Ireland_marketShare_data_frame)
+  for (j in 1 : length(year)) {
+    
+    OS_Ireland_marketShare_data_frame[ lengthOfDataFrame + j, ] = c(h_Ireland$Year[j], h_Ireland$Quarter[j], as.character(h_Ireland$Country[j]), colnames( h_Ireland )[i] , h_Ireland[j, i])
+  }
+  OS_Ireland_marketShare_data_frame[is.na(OS_Ireland_marketShare_data_frame)] <- 0
+  setwd("D:\\Project")
+  write.csv(OS_Ireland_marketShare_data_frame, file="IrelandOSValue.csv",row.names = F)
+  
+}
+
+
+
+#####################  LOADING OPERATING SYSTEM DATA IN DATAFRAMES FOR COUNTRY INDIA ##################################
+
+
+
+
+
+setwd("D:\\dummy\\smartphone\\Operating system_clean\\OS\\India")
+
+India_data_2014 <- read.csv('D:\\dummy\\smartphone\\Operating system_clean\\OS\\India\\os_combined-IN-quarterly-20141-20144.csv')
+
+test_India_2014 <- India_data_2014
+
+test_India_2014 <- test_India_2014[ , which(names(test_India_2014) %in% c("Date","Android","Samsung","SymbianOS","Windows","Linux","iOS","bada","LG","Other"))]
+setwd("D:\\Project")
+write.csv(test_India_2014, file="India_2014.csv",row.names = FALSE)
+
+
+
+setwd("D:\\dummy\\smartphone\\Operating system_clean\\OS\\India")
+
+India_data_2015 <- read.csv('D:\\dummy\\smartphone\\Operating system_clean\\OS\\India\\os_combined-IN-quarterly-20151-20154.csv')
+
+test_India_2015 <- India_data_2015
+
+test_India_2015 <- test_India_2015[ , which(names(test_India_2015) %in% c("Date","Android","Samsung","SymbianOS","Windows","Linux","iOS","bada","LG","Other"))]
+setwd("D:\\Project")
+write.csv(test_India_2015, file="India_2015.csv",row.names = FALSE)
+
+
+
+setwd("D:\\dummy\\smartphone\\Operating system_clean\\OS\\India")
+
+India_data_2016 <- read.csv('D:\\dummy\\smartphone\\Operating system_clean\\OS\\India\\os_combined-IN-quarterly-20161-20164.csv')
+
+test_India_2016 <- India_data_2016
+
+test_India_2016 <- test_India_2016[ , which(names(test_India_2016) %in% c("Date","Android","Samsung","SymbianOS","Windows","Linux","iOS","bada","LG","Other"))]
+setwd("D:\\Project")
+write.csv(test_India_2016, file="India_2016.csv",row.names = FALSE)
+
+
+setwd("D:\\dummy\\smartphone\\Operating system_clean\\OS\\India")
+
+India_data_2017 <- read.csv('D:\\dummy\\smartphone\\Operating system_clean\\OS\\India\\os_combined-IN-quarterly-20171-20174.csv')
+
+test_India_2017 <- India_data_2017
+
+test_India_2017 <- test_India_2017[ , which(names(test_India_2017) %in% c("Date","Android","Samsung","SymbianOS","Windows","Linux","iOS","bada","LG","Other"))]
+setwd("D:\\Project")
+write.csv(test_India_2017, file="India_2017.csv",row.names = FALSE)
+
+
+
+
+
+setwd("D:\\dummy\\smartphone\\Operating system_clean\\OS\\India")
+
+India_data_2018 <- read.csv('D:\\dummy\\smartphone\\Operating system_clean\\OS\\India\\os_combined-IN-quarterly-20181-20184.csv')
+
+test_India_2018 <- India_data_2018
+
+test_India_2018 <- test_India_2018[ , which(names(test_India_2018) %in% c("Date","Android","Samsung","SymbianOS","Windows","Linux","iOS","bada","LG","Other"))]
+setwd("D:\\Project")
+write.csv(test_India_2018, file="India_2018.csv",row.names = FALSE)
+
+
+OS1_India_2014 <- read.csv("D:\\Project\\India_2014.csv")
+
+#----
+
+OSedit_India_2014 <- OS1_India_2014
+
+#2. #add column inbetween two columns
+OSedit_India_2014 <- add_column(OSedit_India_2014, Quarter=1:4, .after = "Date")
+
+#remove pattern from columns
+#gsub("([0-9]+)-.*", "\\1", CN1$Date)
+
+#list2 <- rep("2018",4)
+#3. Remove pattern
+OSedit_India_2014$Date <- gsub("([0-9]+)-.*", "\\1", OSedit_India_2014$Date)
+
+
+#CN1[,1] <- NULL
+#4.# Rename column name
+names(OSedit_India_2014)[1]<-"Year"
+
+
+OS_CN1_India_2014 <- OSedit_India_2014
+
+#---------------------------------
+
+OS1_India_2015 <- read.csv("D:\\Project\\India_2015.csv")
+
+#----
+
+OSedit_India_2015 <- OS1_India_2015
+
+#2. #add column inbetween two columns
+OSedit_India_2015 <- add_column(OSedit_India_2015, Quarter=1:4, .after = "Date")
+
+#remove pattern from columns
+#gsub("([0-9]+)-.*", "\\1", CN1$Date)
+
+#list2 <- rep("2018",4)
+#3. Remove pattern
+OSedit_India_2015$Date <- gsub("([0-9]+)-.*", "\\1", OSedit_India_2015$Date)
+
+
+#CN1[,1] <- NULL
+#4.# Rename column name
+names(OSedit_India_2015)[1]<-"Year"
+
+
+OS_CN1_India_2015 <- OSedit_India_2015
+#--------------------------------------------------------------------
+
+
+OS1_India_2016 <- read.csv("D:\\Project\\India_2016.csv")
+
+#----
+
+OSedit_India_2016 <- OS1_India_2016
+
+#2. #add column inbetween two columns
+OSedit_India_2016 <- add_column(OSedit_India_2016, Quarter=1:4, .after = "Date")
+
+#remove pattern from columns
+#gsub("([0-9]+)-.*", "\\1", CN1$Date)
+
+#list2 <- rep("2018",4)
+#3. Remove pattern
+OSedit_India_2016$Date <- gsub("([0-9]+)-.*", "\\1", OSedit_India_2016$Date)
+
+
+#CN1[,1] <- NULL
+#4.# Rename column name
+names(OSedit_India_2016)[1]<-"Year"
+
+
+OS_CN1_India_2016 <- OSedit_India_2016
+
+#------------------------------------------------------------------------------------------
+
+OS1_India_2017 <- read.csv("D:\\Project\\India_2017.csv")
+
+#----
+
+OSedit_India_2017 <- OS1_India_2017
+
+#2. #add column inbetween two columns
+OSedit_India_2017 <- add_column(OSedit_India_2017, Quarter=1:4, .after = "Date")
+
+#remove pattern from columns
+#gsub("([0-9]+)-.*", "\\1", CN1$Date)
+
+#list2 <- rep("2018",4)
+#3. Remove pattern
+OSedit_India_2017$Date <- gsub("([0-9]+)-.*", "\\1", OSedit_India_2017$Date)
+
+
+#CN1[,1] <- NULL
+#4.# Rename column name
+names(OSedit_India_2017)[1]<-"Year"
+
+
+OS_CN1_India_2017 <- OSedit_India_2017
+
+
+#----------------------------------------------------------------------------
+
+
+OS1_India_2018 <- read.csv("D:\\Project\\India_2018.csv")
+
+#----
+
+OSedit_India_2018 <- OS1_India_2018
+
+#2. #add column inbetween two columns
+OSedit_India_2018 <- add_column(OSedit_India_2018, Quarter=1:4, .after = "Date")
+
+#remove pattern from columns
+#gsub("([0-9]+)-.*", "\\1", CN1$Date)
+
+#list2 <- rep("2018",4)
+#3. Remove pattern
+OSedit_India_2018$Date <- gsub("([0-9]+)-.*", "\\1", OSedit_India_2018$Date)
+
+
+#CN1[,1] <- NULL
+#4.# Rename column name
+names(OSedit_India_2018)[1]<-"Year"
+
+
+OS_CN1_India_2018 <- OSedit_India_2018
+
+
+############## MERGING ALL DATAFRAMES TO GET FINAL OPERATING SYSTEM DATA FOR COUNTRY INDIA  ###################################
+
+
+
+OS_India_marketShareDf = Reduce(function(x, y) merge(x, y, all=TRUE), list(OS_CN1_India_2014,OS_CN1_India_2015,OS_CN1_India_2016,OS_CN1_India_2017,OS_CN1_India_2018))
+
+OS_India_marketShareDf$Country <- "India"
+setwd("D:\\Project")
+write.csv(OS_India_marketShareDf, file="India.csv",row.names =  F)
+
+
+
+
+h_India <- read.csv("D:\\Project\\India.csv")
+
+
+year = h_India$Year
+OS_India_marketShare_data_frame <- data.frame(matrix(ncol = 5, nrow= 0))
+column_names <- c("Year", "Quarter", "Country", "Operating System", "Value")
+colnames(OS_India_marketShare_data_frame) <- column_names
+#str(h_India)
+
+
+for (i in c(3,4,5,6,7,9)) {
+  lengthOfDataFrame = nrow(OS_India_marketShare_data_frame)
+  for (j in 1 : length(year)) {
+    
+    OS_India_marketShare_data_frame[ lengthOfDataFrame + j, ] = c(h_India$Year[j], h_India$Quarter[j], as.character(h_India$Country[j]), colnames( h_India )[i] , h_India[j, i])
+  }
+  OS_India_marketShare_data_frame[is.na(OS_India_marketShare_data_frame)] <- 0
+  setwd("D:\\Project")
+  write.csv(OS_India_marketShare_data_frame, file="IndiaOSValue.csv",row.names = F)
+  
+}
+
+
+#######################  LOADING OPERATING SYSTEM DATA IN DATAFRAMES FOR COUNTRY UNITED STATES OF AMERICA ###########################
+
+
+
+setwd("D:\\dummy\\smartphone\\Operating system_clean\\OS\\USA")
+
+USA_data_2014 <- read.csv('D:\\dummy\\smartphone\\Operating system_clean\\OS\\USA\\os_combined-US-quarterly-20141-20144.csv')
+
+test_USA_2014 <- USA_data_2014
+
+#x <- x[-c(3,5,8,11,12,13,14,16,18,19,21,22,23,24,25,26,27,28,29,30,31,33,34,35,36,37)]
+test_USA_2014 <- test_USA_2014[ , which(names(test_USA_2014) %in% c("Date","Android","Samsung","SymbianOS","Windows","Linux","iOS","bada","LG","Other"))]
+setwd("D:\\Project")
+write.csv(test_USA_2014, file="USA_2014.csv",row.names = FALSE)
+
+
+setwd("D:\\dummy\\smartphone\\Operating system_clean\\OS\\USA")
+
+USA_data_2015 <- read.csv('D:\\dummy\\smartphone\\Operating system_clean\\OS\\USA\\os_combined-US-quarterly-20151-20154.csv')
+
+test_USA_2015 <- USA_data_2015
+
+#x <- x[-c(3,5,8,11,12,13,14,16,18,19,21,22,23,24,25,26,27,28,29,30,31,33,34,35,36,37)]
+test_USA_2015 <- test_USA_2015[ , which(names(test_USA_2015) %in% c("Date","Android","Samsung","SymbianOS","Windows","Linux","iOS","bada","LG","Other"))]
+setwd("D:\\Project")
+write.csv(test_USA_2015, file="USA_2015.csv",row.names = FALSE)
+
+
+setwd("D:\\dummy\\smartphone\\Operating system_clean\\OS\\USA")
+
+USA_data_2016 <- read.csv('D:\\dummy\\smartphone\\Operating system_clean\\OS\\USA\\os_combined-US-quarterly-20161-20164.csv')
+
+test_USA_2016 <- USA_data_2016
+
+#x <- x[-c(3,5,8,11,12,13,14,16,18,19,21,22,23,24,25,26,27,28,29,30,31,33,34,35,36,37)]
+test_USA_2016 <- test_USA_2016[ , which(names(test_USA_2016) %in% c("Date","Android","Samsung","SymbianOS","Windows","Linux","iOS","bada","LG","Other"))]
+setwd("D:\\Project")
+write.csv(test_USA_2016, file="USA_2016.csv",row.names = FALSE)
+
+
+
+
+setwd("D:\\dummy\\smartphone\\Operating system_clean\\OS\\USA")
+
+USA_data_2017 <- read.csv('D:\\dummy\\smartphone\\Operating system_clean\\OS\\USA\\os_combined-US-quarterly-20171-20174.csv')
+
+test_USA_2017 <- USA_data_2017
+
+#x <- x[-c(3,5,8,11,12,13,14,16,18,19,21,22,23,24,25,26,27,28,29,30,31,33,34,35,36,37)]
+test_USA_2017 <- test_USA_2017[ , which(names(test_USA_2017) %in% c("Date","Android","Samsung","SymbianOS","Windows","Linux","iOS","bada","LG","Other"))]
+setwd("D:\\Project")
+write.csv(test_USA_2017, file="USA_2017.csv",row.names = FALSE)
+
+
+
+setwd("D:\\dummy\\smartphone\\Operating system_clean\\OS\\USA")
+
+USA_data_2018 <- read.csv('D:\\dummy\\smartphone\\Operating system_clean\\OS\\USA\\os_combined-US-quarterly-20181-20184.csv')
+
+test_USA_2018 <- USA_data_2018
+
+#x <- x[-c(3,5,8,11,12,13,14,16,18,19,21,22,23,24,25,26,27,28,29,30,31,33,34,35,36,37)]
+test_USA_2018 <- test_USA_2018[ , which(names(test_USA_2018) %in% c("Date","Android","Samsung","SymbianOS","Windows","Linux","iOS","bada","LG","Other"))]
+setwd("D:\\Project")
+write.csv(test_USA_2018, file="USA_2018.csv",row.names = FALSE)
+
+
+
+OS1_USA_2014 <- read.csv("D:\\Project\\USA_2014.csv")
+
+#----
+
+OSedit_USA_2014 <- OS1_USA_2014
+
+#2. #add column inbetween two columns
+OSedit_USA_2014 <- add_column(OSedit_USA_2014, Quarter=1:4, .after = "Date")
+
+#remove pattern from columns
+#gsub("([0-9]+)-.*", "\\1", CN1$Date)
+
+#list2 <- rep("2018",4)
+#3. Remove pattern
+OSedit_USA_2014$Date <- gsub("([0-9]+)-.*", "\\1", OSedit_USA_2014$Date)
+
+
+#CN1[,1] <- NULL
+#4.# Rename column name
+names(OSedit_USA_2014)[1]<-"Year"
+
+
+OS_CN1_USA_2014 <- OSedit_USA_2014
+
+
+
+OS1_USA_2015 <- read.csv("D:\\Project\\USA_2015.csv")
+
+#----
+
+OSedit_USA_2015 <- OS1_USA_2015
+
+#2. #add column inbetween two columns
+OSedit_USA_2015 <- add_column(OSedit_USA_2015, Quarter=1:4, .after = "Date")
+
+#remove pattern from columns
+#gsub("([0-9]+)-.*", "\\1", CN1$Date)
+
+#list2 <- rep("2018",4)
+#3. Remove pattern
+OSedit_USA_2015$Date <- gsub("([0-9]+)-.*", "\\1", OSedit_USA_2015$Date)
+
+
+#CN1[,1] <- NULL
+#4.# Rename column name
+names(OSedit_USA_2015)[1]<-"Year"
+
+
+OS_CN1_USA_2015 <- OSedit_USA_2015
+
+#-----------------------------------------
+
+OS1_USA_2016 <- read.csv("D:\\Project\\USA_2016.csv")
+
+#----
+
+OSedit_USA_2016 <- OS1_USA_2016
+
+#2. #add column inbetween two columns
+OSedit_USA_2016 <- add_column(OSedit_USA_2016, Quarter=1:4, .after = "Date")
+
+#remove pattern from columns
+#gsub("([0-9]+)-.*", "\\1", CN1$Date)
+
+#list2 <- rep("2018",4)
+#3. Remove pattern
+OSedit_USA_2016$Date <- gsub("([0-9]+)-.*", "\\1", OSedit_USA_2016$Date)
+
+
+#CN1[,1] <- NULL
+#4.# Rename column name
+names(OSedit_USA_2016)[1]<-"Year"
+
+
+OS_CN1_USA_2016 <- OSedit_USA_2016
+
+
+#--------------------------------
+
+
+OS1_USA_2017 <- read.csv("D:\\Project\\USA_2017.csv")
+
+#----
+
+OSedit_USA_2017 <- OS1_USA_2017
+
+#2. #add column inbetween two columns
+OSedit_USA_2017 <- add_column(OSedit_USA_2017, Quarter=1:4, .after = "Date")
+
+#remove pattern from columns
+#gsub("([0-9]+)-.*", "\\1", CN1$Date)
+
+#list2 <- rep("2018",4)
+#3. Remove pattern
+OSedit_USA_2017$Date <- gsub("([0-9]+)-.*", "\\1", OSedit_USA_2017$Date)
+
+
+#CN1[,1] <- NULL
+#4.# Rename column name
+names(OSedit_USA_2017)[1]<-"Year"
+
+
+OS_CN1_USA_2017 <- OSedit_USA_2017
+
+
+#---------------------------------------------------------------------
+
+
+OS1_USA_2018 <- read.csv("D:\\Project\\USA_2018.csv")
+
+#----
+
+OSedit_USA_2018 <- OS1_USA_2018
+
+#2. #add column inbetween two columns
+OSedit_USA_2018 <- add_column(OSedit_USA_2018, Quarter=1:4, .after = "Date")
+
+#remove pattern from columns
+#gsub("([0-9]+)-.*", "\\1", CN1$Date)
+
+#list2 <- rep("2018",4)
+#3. Remove pattern
+OSedit_USA_2018$Date <- gsub("([0-9]+)-.*", "\\1", OSedit_USA_2018$Date)
+
+
+#CN1[,1] <- NULL
+#4.# Rename column name
+names(OSedit_USA_2018)[1]<-"Year"
+
+
+OS_CN1_USA_2018 <- OSedit_USA_2018
+
+
+##################### MERGING ALL DATAFRAMES TO GET FINAL OPERATING SYSTEM DATA FOR COUNTRY USA #######################################
+
+
+OS_USA_marketShareDf = Reduce(function(x, y) merge(x, y, all=TRUE), list(OS_CN1_USA_2014,OS_CN1_USA_2015,OS_CN1_USA_2016,OS_CN1_USA_2017,OS_CN1_USA_2018))
+
+OS_USA_marketShareDf$Country <- "USA"
+setwd("D:\\Project")
+write.csv(OS_USA_marketShareDf, file="USA.csv",row.names =  F)
+
+
+
+
+h_USA <- read.csv("D:\\Project\\USA.csv")
+
+
+year = h_USA$Year
+OS_USA_marketShare_data_frame <- data.frame(matrix(ncol = 5, nrow= 0))
+column_names <- c("Year", "Quarter", "Country", "Operating System", "Value")
+colnames(OS_USA_marketShare_data_frame) <- column_names
+
+
+
+for (i in c(3,4,5,6,7,9)) {
+  lengthOfDataFrame = nrow(OS_USA_marketShare_data_frame)
+  for (j in 1 : length(year)) {
+    
+    OS_USA_marketShare_data_frame[ lengthOfDataFrame + j, ] = c(h_USA$Year[j], h_USA$Quarter[j], as.character(h_USA$Country[j]), colnames( h_USA )[i] , h_USA[j, i])
+  }
+  OS_USA_marketShare_data_frame[is.na(OS_USA_marketShare_data_frame)] <- 0
+  setwd("D:\\Project")
+  write.csv(OS_USA_marketShare_data_frame, file="USAOSValue.csv",row.names = F)
+  
+}
+
+
+OS_USA_marketShareDf = Reduce(function(x, y) merge(x, y, all=TRUE), list(OS_CN1_USA_2014,OS_CN1_USA_2015,OS_CN1_USA_2016,OS_CN1_USA_2017,OS_CN1_USA_2018))
+
+OS_USA_marketShareDf$Country <- "USA"
+setwd("D:\\Project")
+write.csv(OS_USA_marketShareDf, file="USA.csv",row.names =  F)
+
+
+
+
+h_USA <- read.csv("D:\\Project\\USA.csv")
+
+
+year = h_USA$Year
+OS_USA_marketShare_data_frame <- data.frame(matrix(ncol = 5, nrow= 0))
+column_names <- c("Year", "Quarter", "Country", "Operating System", "Value")
+colnames(OS_USA_marketShare_data_frame) <- column_names
+
+
+
+for (i in c(3,4,5,6,7,9)) {
+  lengthOfDataFrame = nrow(OS_USA_marketShare_data_frame)
+  for (j in 1 : length(year)) {
+    
+    OS_USA_marketShare_data_frame[ lengthOfDataFrame + j, ] = c(h_USA$Year[j], h_USA$Quarter[j], as.character(h_USA$Country[j]), colnames( h_USA )[i] , h_USA[j, i])
+  }
+  OS_USA_marketShare_data_frame[is.na(OS_USA_marketShare_data_frame)] <- 0
+  setwd("D:\\Project")
+  write.csv(OS_USA_marketShare_data_frame, file="USAOSValue.csv",row.names = F)
+  
+}
+
+ 
+
+
+
+
+
+
+
+
+
+
